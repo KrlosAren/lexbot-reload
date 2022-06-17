@@ -13,23 +13,23 @@ services:
     image: lexbot_production_django
     platform: linux/x86_64
     depends_on:
-      - postgres
+      # - postgres
       - redis
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
 
-  postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: lexbot_production_postgres
-    volumes:
-      - production_postgres_data:/var/lib/postgresql/data:Z
-      - production_postgres_data_backups:/backups:z
-    env_file:
-      - ./.envs/.production/.postgres
+  # postgres:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/production/postgres/Dockerfile
+  #   image: lexbot_production_postgres
+  #   volumes:
+  #     - production_postgres_data:/var/lib/postgresql/data:Z
+  #     - production_postgres_data_backups:/backups:z
+  #   env_file:
+  #     - ./.envs/.production/.postgres
 
   traefik:
     build:

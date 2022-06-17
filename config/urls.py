@@ -9,15 +9,15 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    path("users/", include("lexbot.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
+    # path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    # path(
+    #     "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
+    # ),
+    # # Django Admin, use {% url 'admin:index' %}
+    # path(settings.ADMIN_URL, admin.site.urls),
+    # # User management
+    # path("users/", include("lexbot.users.urls", namespace="users")),
+    # path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
@@ -26,11 +26,11 @@ if settings.DEBUG:
 
 # API URLS
 urlpatterns += [
-    # API base url
     path("api/", include("config.api_router")),
-    # DRF auth token
-    path("auth-token/", obtain_auth_token),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
+    path("api/auth/account/",include("allauth.urls")),
+    # path("api/auth/",include("dj_rest_auth.urls")),
+
     path(
         "api/docs/",
         SpectacularSwaggerView.as_view(url_name="api-schema"),

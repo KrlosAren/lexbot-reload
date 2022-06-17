@@ -1,14 +1,11 @@
 from django.urls import path
-
-from lexbot.users.views import (
-    user_detail_view,
-    user_redirect_view,
-    user_update_view,
-)
+from django.urls import include, path
+from lexbot.users.views import UserAuthView, UserInfoProfileView
 
 app_name = "users"
-urlpatterns = [
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+url = [
+    path('register/', UserAuthView.as_view(),name='register'),
+    path('user-info/<int:pk>/', UserInfoProfileView.as_view(), name='user-info'),
 ]
+
+urlpatterns = url

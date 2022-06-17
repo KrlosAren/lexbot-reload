@@ -1,7 +1,7 @@
 import pytest
 from celery.result import EagerResult
 
-from lexbot.users.tasks import get_users_count
+from lexbot.tasks.tasks import get_users_count
 from lexbot.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
